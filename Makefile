@@ -1,7 +1,7 @@
 #-----------------------------------------------------------------------------
 # Global Variables
 #-----------------------------------------------------------------------------
-SHELL := /bin/bash
+SHELL=bash
 
 DOCKER_USER ?= $(DOCKER_USER)
 DOCKER_PASS ?= 
@@ -15,10 +15,9 @@ APP_VERSION := latest
 #-----------------------------------------------------------------------------
 
 .PHONY: prerequisite
-
 prerequisite:
 	git clone https://github.com/edenhill/librdkafka.git
-	cd librdkafka && ./configure --prefix /usr && make && sudo make install
+	cd librdkafka && ./configure && make && sudo make install
 
 
 #-----------------------------------------------------------------------------
