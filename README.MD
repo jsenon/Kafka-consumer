@@ -7,29 +7,35 @@ This is a Simple kafka consumer
 
 ### Func
 
-DRAFT
+Use container in order to debug kafka 
 
 ## Build
 
-Build docker container
+Build locally
 ```
-make build
+make 
 ```
 
-### Launch Container
+## Run Container
 
+Run Container
+```
+docker run -d -e MY_KAFKABOOTSTRAP="123.123.123.123:9092" -e MY_TOPIC="kikoo"  -e MY_GROUPID="consumergroup1"  jsenon/kafka-consumer:latest
+```
 
-### Usage
+## Run on K8S Cluster
 
+Deploy POD
+```
+kubectl apply -f k8s/deployment.yml
+```
 
+## Env
 
-### Env
+- MY_KAFKABOOTSTRAP: Define kafka bootstrap server ie.127.0.0.1
+- MY_TOPIC: Define topic to check ie.mytest
+- MY_GROUPID: Define Consumer group ie.mygroup
 
+## Todo
 
-### TIPS
-
-If you receive `cannot execute binary file: Exec format error`
-
-Compile with  `CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build demoserver.go`
-
-And build `docker build -t jsenon/kafka-consumer:vx.x .`
+[ ] Change Ubuntu with docker image that support gcc and c++
