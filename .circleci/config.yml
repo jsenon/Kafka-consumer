@@ -51,7 +51,7 @@ jobs:
       - run: 
           name: Build App
           command: |
-            CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build 
+            go build 
       - run:
           name: Build application Docker image
           command: |
