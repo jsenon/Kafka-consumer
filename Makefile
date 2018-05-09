@@ -1,6 +1,7 @@
 #-----------------------------------------------------------------------------
 # Global Variables
 #-----------------------------------------------------------------------------
+SHELL := /bin/bash
 
 DOCKER_USER ?= $(DOCKER_USER)
 DOCKER_PASS ?= 
@@ -59,5 +60,7 @@ publish:
 
 clean:
 	rm -rf kafka-consumer
-	cd librdkafka && make clean && make distclean
+	if [ -d librdkafka ]; then \
+		cd librdkafka && make clean && make distclean ; \
+	fi
 	rm -rf librdkafka
