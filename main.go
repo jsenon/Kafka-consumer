@@ -19,7 +19,6 @@ func main() {
 	if err != nil {
 		logger.Error("Failed to create zap logger",
 			zap.String("status", "ERROR"),
-			zap.Int("statusCode", 500),
 			zap.Duration("backoff", time.Second),
 			zap.Error(err),
 		)
@@ -34,23 +33,36 @@ func main() {
 	if err != nil {
 		logger.Error("Failed to create Kafka logger",
 			zap.String("status", "ERROR"),
-			zap.Int("statusCode", 500),
 			zap.Duration("backoff", time.Second),
 			zap.Error(err),
 		)
 	}
 
-	c.SubscribeTopics([]string{mytopic, "^aRegex.*[Tt]opic"}, nil)
+	err = c.SubscribeTopics([]string{mytopic, "^aRegex.*[Tt]opic"}, nil)
+	if err != nil {
+		logger.Error("Failed to Subscribe Kafka topics",
+			zap.String("status", "ERROR"),
+			zap.Duration("backoff", time.Second),
+			zap.Error(err),
+		)
+	}
 
 	for {
-		msg, err := c.ReadMessage(-1)
-		if err == nil {
+		msg, errread := c.ReadMessage(-1)
+		if errread == nil {
 			fmt.Printf("Message on %s: %s\n", msg.TopicPartition, string(msg.Value))
 		} else {
-			fmt.Printf("Consumer error: %v (%v)\n", err, msg)
+			fmt.Printf("Consumer error: %v (%v)\n", errread, msg)
 			break
 		}
 	}
 
-	c.Close()
+	err = c.Close()
+	if err != nil {
+		logger.Error("Failed to close Kafka",
+			zap.String("status", "ERROR"),
+			zap.Duration("backoff", time.Second),
+			zap.Error(err),
+		)
+	}
 }
