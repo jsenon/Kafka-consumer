@@ -47,7 +47,7 @@ RUN go build -o /tmp/run -tags static_all
 
 # Second build phase, copy the generated binary from the first build phase into
 # a "scratch" image, and set the entrypoint to run the binary.
-FROM alpine:latest
+FROM golang:1.10-alpine
 
 RUN apk add --no-cache curl wget
 RUN addgroup -g 1000 -S www-user && \
