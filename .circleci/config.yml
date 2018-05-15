@@ -49,14 +49,10 @@ jobs:
           name: Code Coverage
           command: |
             bash <(curl -s https://codecov.io/bash)
-      - run: 
-          name: Build App
-          command: |
-            go build 
       - run:
           name: Build application Docker image
           command: |
-            docker build -t jsenon/kafka-consumer:develop .
+            docker build -t jsenon/kafka-consumer:latest .
       - run: 
           name: DockerHub Login
           command: |
@@ -64,4 +60,4 @@ jobs:
       - run:
           name: Push to registry
           command: |
-            docker push $DOCKER_USER/kafka-consumer:develop
+            docker push $DOCKER_USER/kafka-consumer:latest

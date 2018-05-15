@@ -1,23 +1,23 @@
 apiVersion: extensions/v1beta1 # for versions before 1.8.0 use apps/v1beta1
 kind: Deployment
 metadata:
-  name: kafka-consumer-dev
+  name: kafka-consumer
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: kafka-consumer-dev
+        app: kafka-consumer
         version: v.0.0.1
     spec:
       containers:
-      - name: kafka-consumer-dev
-        image: docker.io/jsenon/kafka-consumer:develop
+      - name: kafka-consumer
+        image: docker.io/jsenon/kafka-consumer:latest
         env:
         - name: MY_KAFKABOOTSTRAP
-          value: "100.69.163.174:9092"
+          value: "123.123.123.123:9092"
         - name: MY_TOPIC
-          value: "datahub"
+          value: "kikoo"
         - name: MY_GROUPID
-          value: "consumergroup2"
+          value: "consumergroup1"
         imagePullPolicy: Always
