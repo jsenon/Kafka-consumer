@@ -22,6 +22,7 @@ func main() {
 			zap.Duration("backoff", time.Second),
 			zap.Error(err),
 		)
+		return
 	}
 
 	c, err := kafka.NewConsumer(&kafka.ConfigMap{
@@ -36,6 +37,7 @@ func main() {
 			zap.Duration("backoff", time.Second),
 			zap.Error(err),
 		)
+		return
 	}
 
 	err = c.SubscribeTopics([]string{mytopic, "^aRegex.*[Tt]opic"}, nil)
@@ -45,6 +47,7 @@ func main() {
 			zap.Duration("backoff", time.Second),
 			zap.Error(err),
 		)
+		return
 	}
 
 	for {
@@ -64,5 +67,6 @@ func main() {
 			zap.Duration("backoff", time.Second),
 			zap.Error(err),
 		)
+		return
 	}
 }
