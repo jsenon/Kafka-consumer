@@ -32,7 +32,7 @@ func main() {
 	})
 
 	if err != nil {
-		logger.Error("Failed to create Kafka logger",
+		logger.Error("Failed to create Kafka connection",
 			zap.String("status", "ERROR"),
 			zap.Duration("backoff", time.Second),
 			zap.Error(err),
